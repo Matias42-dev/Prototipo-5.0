@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ClaseCheck - Prototipo</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/minified/html5-qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <img src="logo.svg" alt="ClaseCheck" class="logo">
+    <div class="brand">
+      <div class="title">ClaseCheck</div>
+      <div class="subtitle">Registro inteligente de asistencia</div>
+    </div>
+  </header>
+
+  <main id="loginView" class="centered">
+    <div class="card login-card">
+      <h2>Iniciar sesión</h2>
+      <label>Rol</label>
+      <select id="role">
+        <option value="student">Alumno</option>
+        <option value="teacher">Docente</option>
+        <option value="admin">Administración</option>
+      </select>
+      <label>Usuario</label>
+      <input id="username" placeholder="Usuario (ej: alumno, docente, admin)">
+      <label>Contraseña</label>
+      <input id="password" type="password" placeholder="Contraseña">
+      <div class="row">
+        <button id="loginBtn">Ingresar</button>
+        <button id="demoCreds" class="secondary">Credenciales</button>
+      </div>
+      <p id="loginError" class="error" style="display:none">Usuario o contraseña incorrectos</p>
+    </div>
+  </main>
+
+  <main id="app" class="hidden container">
+    <nav class="nav">
+      <div id="navUser" class="nav-user">Usuario</div>
+      <div class="nav-actions">
+        <button id="logoutBtn" class="secondary small">Cerrar sesión</button>
+      </div>
+    </nav>
+
+    <section class="grid">
+      <div class="card" id="leftCard">
+        <div id="studentPanel" class="panel hidden">
+          <h3>Panel Alumno</h3>
+          <label>Materia (inscripto)</label>
+          <select id="studentClasses"></select>
+
+          <div class="row" style="margin-top:8px">
+            <button id="openScanner">Escanear QR (usar cámara)</button>
+            <button id="useTokenBtn" class="secondary">Pegar token</button>
+          </div>
+
+          <div id="scannerArea" class="hidden">
+            <div id="reader" style="width:100%"></div>
+            <div class="row"><button id="closeScanner" class="secondary">Cerrar cámara</button></div>
+          </div>
+
+          <div id="tokenPasteArea" class="hidden" style="margin-top:10px">
+            <input id="manualToken" placeholder="Pegá token aquí" />
+            <button id="pasteTokenBtn">Registrar token</button>
+          </div>
+
+          <div id="geoResult" class="note" style="margin-top:10px"></div>
+          <h4>Mi historial</h4>
+          <table id="studentHistory"><thead><tr><th>Materia</th><th>Fecha</th><th>Estado</th></tr></thead><tbody></tbody></table>
+        </div>
+
+        <div id="teacherPanel" class="panel hidden">
+          <h3>Panel Docente</h3>
+          <label>Seleccionar materia</label>
+          <select id="teacherClasses"></select>
+          <div class="row" style="margin-top:8px">
+            <button id="generateQR">Generar QR de clase</button>
+            <button id="stopQR" class="secondary" style="display:none">Detener QR</button>
+            <button id="validateAll" class="secondary">Validar todo</button>
+          </div>
+          <div id="qrArea" style="margin-top:12px"></div>
+          <h4 style="margin-top:12px">Registros recientes</h4>
+          <table id="teacherList"><thead><tr><th>Alumno</th><th>Fecha</th><th>Validado</th></tr></thead><tbody></tbody></table>
+        </div>
+
+        <div id="adminPanel" class="panel hidden">
+          <h3>Panel Administración</h3>
+          <p class="note">Alertas y reportes.</p>
+          <div id="alerts"></div>
+          <h4 style="margin-top:12px">Reporte</h4>
+          <table id="adminReport"><thead><tr><th>Alumno</th><th>Materia</th><th>Faltas</th></tr></thead><tbody></tbody></table>
+        </div>
+      </div>
+
+      <aside class="card" id="rightCard">
+        <h4>Instrucciones</h4>
+        <ul>
+          <li>Docente: generar QR visible en pantalla.</li>
+          <li>Alumno: escanear con cámara o pegar token.</li>
+          <li>La app valida ubicación (si el navegador lo permite) y simula Bluetooth.</li>
+        </ul>
+        <hr>
+        <div class="note">Umbral de faltas: <strong id="thresholdLabel">3</strong></div>
+        <div style="margin-top:12px" id="statusBox"></div>
+        <hr>
+        <div class="center" style="margin-top:8px">
+          <button id="clearData" class="secondary">Limpiar datos (simulación)</button>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="footer">ClaseCheck — prototipo · ICES 2025</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

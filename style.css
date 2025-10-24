@@ -1,0 +1,43 @@
+:root{
+  --bg:#f6f8fb; --card:#fff; --accent:#0f62fe; --muted:#6b7280; --ok:#036a31; --danger:#b00020;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;background:var(--bg);color:#111}
+.topbar{display:flex;align-items:center;gap:12px;padding:12px 18px;background:linear-gradient(90deg,var(--accent),#2b6be4);color:#fff}
+.logo{width:48px;height:48px}
+.brand .title{font-weight:700}
+.brand .subtitle{font-size:13px;opacity:0.9}
+
+.centered{display:flex;align-items:center;justify-content:center;height:70vh;padding:12px}
+.card{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 8px 24px rgba(12,24,60,0.06)}
+.login-card{width:100%;max-width:420px}
+
+.row{display:flex;gap:8px;align-items:center}
+button{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer}
+button.secondary{background:#64748b}
+button.small{padding:6px 10px;font-size:14px}
+.error{color:var(--danger)}
+
+.container{padding:12px}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.nav-user{font-weight:600}
+
+.grid{display:grid;grid-template-columns:1fr 340px;gap:16px}
+#leftCard{min-height:160px}
+#rightCard{position:sticky;top:18px;height:max-content}
+
+.note{color:var(--muted);font-size:14px}
+.hidden{display:none}
+input, select{width:100%;padding:8px;margin-top:6px;border-radius:8px;border:1px solid #e6e9ef}
+
+table{width:100%;border-collapse:collapse;margin-top:8px}
+th,td{padding:8px;border-bottom:1px solid #f1f3f6;text-align:left;font-size:14px}
+
+.center{display:flex;justify-content:center;align-items:center}
+
+@media (max-width:900px){
+  .grid{grid-template-columns:1fr}
+  .topbar{padding:10px}
+  .logo{width:40px;height:40px}
+  .login-card{max-width:360px}
+}
